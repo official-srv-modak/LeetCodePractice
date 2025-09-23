@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class MergeList {
     public static int size(ListNode list)
@@ -81,6 +80,22 @@ public class MergeList {
         return head;
     }
 
+    public static ListNode append(ListNode head, Integer... a)
+    {
+        ListNode curr = head;
+        while(curr.next != null)
+            curr = curr.next;
+        for(int val : a)
+        {
+            if(curr == null) {
+                curr = new ListNode();
+                curr = curr.next;
+            }
+            curr.val = val;
+        }
+        return head;
+    }
+
     public static void display(ListNode head)
     {
         while(head != null)
@@ -98,10 +113,10 @@ public class MergeList {
 
 
 
-class ListNode {
+class ListNode1 {
       int val;
       ListNode next;
-      ListNode() {}
-      ListNode(int val) { this.val = val; }
-      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      ListNode1() {}
+      ListNode1(int val) { this.val = val; }
+      ListNode1(int val, ListNode next) { this.val = val; this.next = next; }
   }
