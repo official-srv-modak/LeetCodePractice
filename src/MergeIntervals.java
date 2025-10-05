@@ -4,37 +4,42 @@ import java.util.List;
 
 public class MergeIntervals {
 
+    public static int containInList(List<int[]> mergedList, int[] val){
+        for(int i = mergedList.size() - 1; i >=0; i--)
+        {
+            int [] v = mergedList.get(i);
+            if(v[0] == val[0] && v[1] == val[1])
+                return i;
+        }
+        return -1;
+    }
+
     public static int[][] merge(int[][] intervals) {
 
         if(intervals.length == 1)
             return intervals;
+
         Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));
 
-        int[] prev = intervals[0];
         List<int[]> mergedList = new ArrayList<>();
-        for(int i = 1; i < intervals.length; i++)
-        {
-            int[] innerArray = intervals[i];
 
-            if(innerArray[0] <= prev[1])
+        int[] prev = intervals[0];
+
+        for(int i = 0; i < intervals.length; i++)
+        {
+            int[] curr = intervals[i];
+            if(prev[1]>=curr[0])
             {
+                mergedList.remove(prev);
                 int[] out = new int[2];
-                out[0] = Math.min(prev[0], innerArray[0]);
-                out[1] = Math.max(prev[1], innerArray[1]);
+                out[0] = Math.min(prev[0], curr[0]);
+                out[1] = Math.max(prev[1], curr[1]);
                 mergedList.add(out);
+                prev = out;
             }
             else{
-                if(mergedList.size() != 0)
-                {
-                    mergedList.add(innerArray);
-                }
-                else
-                {
-                    if(prev[0] != innerArray[0])
-                        mergedList.add(prev);
-                    mergedList.add(innerArray);
-                }
-                prev = innerArray;
+                mergedList.add(curr);
+                prev = curr;
             }
         }
 
@@ -58,8 +63,9 @@ public class MergeIntervals {
 
 //        int[][] intervals3 = {{1,4},{5,6}};
 //        int[][] intervals3 = {{1,4},{2,3}};
-        int[][] intervals3 = {{1,4},{0,2},{3,5}};
-//        int[][] intervals3 = {{1,3},{2,6},{8,10},{15,18}};
+//        int[][] intervals3 = {{1,4},{0,2},{3,5}};
+        int[][] intervals3 = {{1,3},{2,6},{8,10},{15,18}};
+//        int[][] intervals3 = {{1,4},{4,5}};
         display(merge(intervals3));
 
     }
