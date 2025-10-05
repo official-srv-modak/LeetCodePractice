@@ -47,6 +47,25 @@ public class BinaryTree {
         inOrder(node.right);
     }
 
+    public static TreeNode levelOrder(TreeNode node, int val)
+    {
+        if(node == null)
+            return null;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty())
+        {
+            TreeNode node1 = queue.poll();
+            System.out.println(node1.val);
+            if(node1.left != null)
+                queue.add(node1.left);
+            if(node1.right != null)
+                queue.add(node1.right);
+        }
+        return null;
+    }
+
     public static TreeNode BFSLevelOrder(TreeNode node, int val)
     {
         if(node == null)
