@@ -71,7 +71,7 @@ public class BinarySearchTree {
         inOrder(node);*/
 
 
-        sort(new int[]{98,5,2,4,6,12,8,2,12});
+        sort(new int[]{98,5,2,4,6,12,8,12});
 
         for(int val : output)
             System.out.println(val);
